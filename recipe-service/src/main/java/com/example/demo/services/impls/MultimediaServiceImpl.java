@@ -26,23 +26,23 @@ public class MultimediaServiceImpl implements MultimediaService {
     private RecipeRepository recipeRepository;
 
 
-//    @Override
-//    public Multimedia createMultimedia(Long recipeId, Multimedia multimedia) {
-//        Recipe recipe = recipeRepository.findById(recipeId)
-//                .orElseThrow(()->new ResourceNotFoundException("Recipe","Id",recipeId));
-//        recipe.addMultimedia(multimedia);
-//        return multimediaRepository.save(multimedia);
-//    }
-//
-//    @Override
-//    public List<Multimedia> getAllMultimediaByRecipeId(Long recipeId) {
-//        return recipeRepository.findById(recipeId).map(
-//                recipe -> {
-//                    List<Multimedia> multimediaList=recipe.getMultimedia();
-//                    return multimediaList;
-//                }
-//        ).orElseThrow(()->new ResourceNotFoundException("Recipe","Id",recipeId));
-//    }
+    @Override
+    public Multimedia createMultimedia(Long recipeId, Multimedia multimedia) {
+        Recipe recipe = recipeRepository.findById(recipeId)
+                .orElseThrow(()->new ResourceNotFoundException("Recipe","Id",recipeId));
+        recipe.addMultimedia(multimedia);
+        return multimediaRepository.save(multimedia);
+    }
+
+    @Override
+    public List<Multimedia> getAllMultimediaByRecipeId(Long recipeId) {
+        return recipeRepository.findById(recipeId).map(
+                recipe -> {
+                    List<Multimedia> multimediaList=recipe.getMultimedia();
+                    return multimediaList;
+                }
+        ).orElseThrow(()->new ResourceNotFoundException("Recipe","Id",recipeId));
+    }
 
     @Override
     public List<Multimedia> findAll() throws Exception {

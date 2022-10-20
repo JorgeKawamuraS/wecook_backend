@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @Slf4j
-@RequestMapping("/recipes/multimedia")
+@RequestMapping("/multimedia")
 public class MultimediaController {
 
     @Autowired

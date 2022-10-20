@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
-@RequestMapping("/recipes/tags")
+@RequestMapping("/tags")
 public class TagsController {
 
     @Autowired

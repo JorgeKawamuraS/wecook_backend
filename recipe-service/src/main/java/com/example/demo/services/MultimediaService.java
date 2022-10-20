@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface MultimediaService extends CrudService<Multimedia,Long> {
 
-    //Multimedia createMultimedia(Long recipeId,Multimedia multimedia);
+    Multimedia createMultimedia(Long recipeId,Multimedia multimedia);
 
-    //List<Multimedia> getAllMultimediaByRecipeId(Long recipeId);
+    List<Multimedia> getAllMultimediaByRecipeId(Long recipeId);
 }

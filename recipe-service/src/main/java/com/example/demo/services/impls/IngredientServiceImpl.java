@@ -35,14 +35,14 @@ public class IngredientServiceImpl implements IngredientService {
                 .orElseThrow(()->new ResourceNotFoundException("Ingredient", "Name", name));
     }
 
-//    @Override
-//    public List<Ingredient> getAllIngredientsByRecipeId(Long recipeId) {
-//        return recipeRepository.findById(recipeId).map(
-//                recipe -> {
-//                    List<Ingredient> ingredientList = recipe.getIngredients();
-//                    return ingredientList;}
-//        ).orElseThrow(()->new ResourceNotFoundException("Recipe", "Id", recipeId));
-//    }
+    @Override
+    public List<Ingredient> getAllIngredientsByRecipeId(Long recipeId) {
+        return recipeRepository.findById(recipeId).map(
+                recipe -> {
+                    List<Ingredient> ingredientList = recipe.getIngredients();
+                    return ingredientList;}
+        ).orElseThrow(()->new ResourceNotFoundException("Recipe", "Id", recipeId));
+    }
 
     @Override
     public List<Ingredient> findAll() throws Exception {

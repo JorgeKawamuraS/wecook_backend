@@ -28,13 +28,13 @@ public class TagServiceImpl implements TagService {
         return tagRepository.save(tag);
     }
 
-//    @Override
-//    public List<Recipe> getAllRecipesByTagId(Long tagId) {
-//        return tagRepository.findById(tagId).map(
-//                tag->{ List<Recipe> recipes=tag.getRecipes();
-//                    return recipes;
-//                }).orElseThrow(()->new ResourceNotFoundException("Tag","Id",tagId));
-//    }
+    @Override
+    public List<Recipe> getAllRecipesByTagId(Long tagId) {
+        return tagRepository.findById(tagId).map(
+                tag->{ List<Recipe> recipes=tag.getRecipes();
+                    return recipes;
+                }).orElseThrow(()->new ResourceNotFoundException("Tag","Id",tagId));
+    }
 
     @Override
     public Tag getTagByName(String name) {

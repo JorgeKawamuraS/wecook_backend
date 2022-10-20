@@ -80,20 +80,10 @@ public class RecipesController {
         recipeService.deleteById(recipeId);
     }
 
-//    @GetMapping(path = "{recipeId}/ingredients")
-//    public List<Ingredient> getAllIngredientsByRecipeId(@PathVariable("recipeId") Long recipeId){
-//        List<Ingredient> ingredients = ingredientService.getAllIngredientsByRecipeId(recipeId);
-//        return ingredients;
-//    }
-
-    @GetMapping(path = "profiles/{profileId}/recipes")
-    public List<Recipe> getAllRecipesByProfileId(@PathVariable("profileId") Long profileId){
-        return recipeService.getAllRecipesByProfileId(profileId);
-    }
-
-    @GetMapping(path = "cookbooks/{cookbookId}/recipes")
-    public List<Recipe> getAllRecipesByCookbookId(@PathVariable("cookbookId") Long cookbookId){
-        return recipeService.getAllRecipesByCookbookId(cookbookId);
+    @GetMapping(path = "{recipeId}/ingredients")
+    public List<Ingredient> getAllIngredientsByRecipeId(@PathVariable("recipeId") Long recipeId){
+        List<Ingredient> ingredients = ingredientService.getAllIngredientsByRecipeId(recipeId);
+        return ingredients;
     }
 
     @PostMapping
@@ -123,14 +113,14 @@ public class RecipesController {
         return ResponseEntity.status(HttpStatus.CREATED).body(scoreDB);
     }
 
-//    @PostMapping(path = "{recipeId}/multimedia")
-//    public ResponseEntity<Multimedia> createMultimedia(@PathVariable("recipeId") Long recipeId, @Valid @RequestBody Multimedia resource, BindingResult result){
-//        if (result.hasErrors()){
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,this.formatMessage(result));
-//        }
-//        Multimedia multimedia = multimediaService.createMultimedia(recipeId,resource);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(multimedia);
-//    }
+    @PostMapping(path = "{recipeId}/multimedia")
+    public ResponseEntity<Multimedia> createMultimedia(@PathVariable("recipeId") Long recipeId, @Valid @RequestBody Multimedia resource, BindingResult result){
+        if (result.hasErrors()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,this.formatMessage(result));
+        }
+        Multimedia multimedia = multimediaService.createMultimedia(recipeId,resource);
+        return ResponseEntity.status(HttpStatus.CREATED).body(multimedia);
+    }
 
 
     private String formatMessage( BindingResult result){

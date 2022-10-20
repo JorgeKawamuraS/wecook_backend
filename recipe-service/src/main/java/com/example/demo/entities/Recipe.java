@@ -1,8 +1,6 @@
 package com.example.demo.entities;
 
 
-import com.example.demo.model.Cookbook;
-import com.example.demo.model.Profile;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -33,44 +31,36 @@ public class Recipe{
     @NotNull
     private String recommendation;
 
-    @Column(name = "profile_id")
-    private Long profileId;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "multimedia_id",nullable = false)
+    private List<Multimedia> multimedia;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST,CascadeType.MERGE},
+            mappedBy = "recipes")
+    private List<Tag> tags;
 
-    @Column(name = "cookbook_id")
-    private Long cookbookId;
+    @ManyToMany(fetch=FetchType.LAZY,
+            cascade = {CascadeType.PERSIST,CascadeType.MERGE},
+            mappedBy = "recipes")
+    private List<Ingredient> ingredients;
 
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+    public boolean hasIngredient(Ingredient ingredient){ return this.getIngredients().contains(ingredient);}
 
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "multimedia_id",nullable = false)
-//    private List<Multimedia> multimedia;
-//
-//    @ManyToMany(fetch = FetchType.LAZY,
-//            cascade = {CascadeType.PERSIST,CascadeType.MERGE},
-//            mappedBy = "recipes")
-//    private List<Tag> tags;
-//
-//    @ManyToMany(fetch=FetchType.LAZY,
-//            cascade = {CascadeType.PERSIST,CascadeType.MERGE},
-//            mappedBy = "recipes")
-//    private List<Ingredient> ingredients;
+    public Recipe assignIngredient(Ingredient ingredient){
+        if(!this.hasIngredient(ingredient))
+            this.getIngredients().add(ingredient);
+        return this;
+    }
 
-//    public List<Ingredient> getIngredients() {
-//        return ingredients;
-//    }
-//    public boolean hasIngredient(Ingredient ingredient){ return this.getIngredients().contains(ingredient);}
-//
-//    public Recipe assignIngredient(Ingredient ingredient){
-//        if(!this.hasIngredient(ingredient))
-//            this.getIngredients().add(ingredient);
-//        return this;
-//    }
-//
-//    public Recipe unassignIngredient(Ingredient ingredient){
-//        if(this.hasIngredient(ingredient))
-//            this.getIngredients().remove(ingredient);
-//        return this;
-//    }
+    public Recipe unassignIngredient(Ingredient ingredient){
+        if(this.hasIngredient(ingredient))
+            this.getIngredients().remove(ingredient);
+        return this;
+    }
 
     public Long getId() {
         return id;
@@ -125,44 +115,34 @@ public class Recipe{
         return this;
     }
 
-//    public List<Multimedia> getMultimedia() {
-//        return multimedia;
-//    }
-//
-//    public Recipe setMultimedia(List<Multimedia> multimedia) {
-//        this.multimedia = multimedia;
-//        return this;
-//    }
-//
-//    public List<Tag> getTags() {
-//        return tags;
-//    }
-
-//    public boolean isTagged(Tag tag){ return this.getTags().contains(tag);}
-//
-//    public Recipe assignTag(Tag tag){
-//        if(!this.isTagged(tag))
-//            this.getTags().add(tag);
-//        return this;
-//    }
-//
-//    public Recipe unAssignTag(Tag tag){
-//        if(this.isTagged(tag))
-//            this.getTags().remove(tag);
-//        return this;
-//    }
-//
-//    public void addMultimedia(Multimedia multimedia){
-//        this.getMultimedia().add(multimedia);
-//    }
-
-    public Long getProfileId() {
-        return profileId;
+    public List<Multimedia> getMultimedia() {
+        return multimedia;
     }
 
-    public Recipe setProfileId(Long profileId) {
-        this.profileId = profileId;
+    public Recipe setMultimedia(List<Multimedia> multimedia) {
+        this.multimedia = multimedia;
         return this;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public boolean isTagged(Tag tag){ return this.getTags().contains(tag);}
+
+    public Recipe assignTag(Tag tag){
+        if(!this.isTagged(tag))
+            this.getTags().add(tag);
+        return this;
+    }
+
+    public Recipe unAssignTag(Tag tag){
+        if(this.isTagged(tag))
+            this.getTags().remove(tag);
+        return this;
+    }
+
+    public void addMultimedia(Multimedia multimedia){
+        this.getMultimedia().add(multimedia);
+    }
 }

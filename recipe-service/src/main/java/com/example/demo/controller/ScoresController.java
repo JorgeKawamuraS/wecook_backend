@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @Slf4j
-@RequestMapping("/recipes/scores")
+@RequestMapping("/scores")
 public class ScoresController {
 
     @Autowired

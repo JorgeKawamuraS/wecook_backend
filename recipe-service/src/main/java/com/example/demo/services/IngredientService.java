@@ -9,6 +9,6 @@ public interface IngredientService extends CrudService<Ingredient,Long>{
     Ingredient createIngredient(Ingredient ingredient);
 
     Ingredient getIngredientByName(String name);
-    //List<Ingredient> getAllIngredientsByRecipeId(Long recipeId);
+    List<Ingredient> getAllIngredientsByRecipeId(Long recipeId);
 }
 
